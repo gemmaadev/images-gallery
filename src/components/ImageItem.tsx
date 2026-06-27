@@ -11,8 +11,8 @@ interface ImageItemProps {
 
 export default function ImageItem({ image, isFeatured }: ImageItemProps) {
   const figureClassName = isFeatured
-    ? "lg:col-span-2 lg:row-span-2 rounded-lg overflow-hidden shadow-lg relative "
-    : "rounded-lg overflow-hidden relative";
+    ? "lg:col-span-2 lg:row-span-2 rounded-lg overflow-hidden shadow-lg relative"
+    : "rounded-lg overflow-hidden h-85 relative";
 
   const featuredBadge = isFeatured ? (
     <div className="absolute top-2 left-2 bg-brand-yellow text-black px-3 py-1 rounded text-xs font-bold">

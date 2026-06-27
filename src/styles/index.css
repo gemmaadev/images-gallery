@@ -67,7 +67,7 @@
 
   /* Focus */
   :focus-visible {
-    @apply outline-ring/50 outline-offset-2;
+    @apply outline-2 outline-primary outline-offset-2;
   }
 }
 
