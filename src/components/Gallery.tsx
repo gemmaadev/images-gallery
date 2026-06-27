@@ -22,11 +22,13 @@ export default function Gallery() {
   // 'setImages' = funció per cambiar la llista
   // IMAGES = valor inicial
   return (
-    <section className="gallery">
-      <div className="gallery-grid">
-        {images.map((image, index) => (
-          <ImageItem key={image.id} image={image} isFeatured={index === 0} />
-        ))}
+    <section className="py-8">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
+          {images.map((image, index) => (
+            <ImageItem key={image.id} image={image} isFeatured={index === 0} />
+          ))}
+        </div>
       </div>
     </section>
   );
