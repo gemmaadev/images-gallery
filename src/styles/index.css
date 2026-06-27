@@ -1,5 +1,22 @@
 @import "tailwindcss";
 @import "./variables.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
 
 img {
   width: 100%;
@@ -17,7 +34,4 @@ img {
 .featured-image {
   grid-column: span 2;
   grid-row: span 2;
-}
-
-.default-image {
 }
