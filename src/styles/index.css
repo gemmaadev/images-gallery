@@ -1,1 +1,22 @@
 @import "./variables.css";
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.featured-image {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.default-image {
+}
