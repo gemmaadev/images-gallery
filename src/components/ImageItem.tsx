@@ -10,9 +10,25 @@ interface ImageItemProps {
 //props són els paràmetres que rep el component
 
 export default function ImageItem({ image, isFeatured }: ImageItemProps) {
+  const figureClassName = isFeatured
+    ? "lg:col-span-2 lg:row-span-2 rounded-lg overflow-hidden shadow-lg relative"
+    : "rounded-lg overflow-hidden h-85 relative";
+
+  const featuredBadge = isFeatured ? (
+    <div className="absolute top-2 left-2 bg-brand-yellow text-black px-3 py-1 rounded text-xs font-bold">
+      Featured
+    </div>
+  ) : null;
+
   return (
-    <figure className={isFeatured ? "featured-image" : "default-image"}>
-      <img id={image.id} src={image.src} alt={image.alt} />
+    <figure className={figureClassName}>
+      <img
+        id={image.id}
+        src={image.src}
+        alt={image.alt}
+        className="w-full h-full object-cover transition-all hover:scale-105 duration-300"
+      />
+      {featuredBadge}
     </figure>
   );
 }
