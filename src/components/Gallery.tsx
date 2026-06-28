@@ -3,6 +3,7 @@ import { IMAGES } from "@/data/images";
 import ImageItem from "./ImageItem";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
+import type { DragEndEvent } from "@dnd-kit/core";
 
 //Component pare
 // Passa dades via props: A Gallery, defineix un array d'objectes amb id i src (utilitza imatges de picsum.photos).
@@ -30,18 +31,52 @@ export default function Gallery() {
     }
   };
 
+  const items = images.map((image) => image.id);
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+    if (active.id === over.id) return;
+
+    // Encontrar posición del que arrastras
+    const activeIndex = images.findIndex((image) => image.id === active.id);
+
+    // Encontrar posición donde lo sueltas
+    const overIndex = images.findIndex((image) => image.id === over.id);
+
+    // Copiar el array (sin mutar el original)
+    const newImages = [...images];
+
+    // Guardar temporalmente
+    const temporalVariable = newImages[activeIndex];
+
+    // Mover over a la posición de active
+    newImages[activeIndex] = newImages[overIndex];
+
+    // Mover el temp (que era active) a la posición de over
+    newImages[overIndex] = temporalVariable;
+
+    // PASO 5: Guardar el nuevo array
+    setImages(newImages);
+    // Estado actualizado con las cartas reordenadas
+  };
+
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
-          {images.map((image, index) => (
-            <ImageItem
-              key={image.id}
-              image={image}
-              isFeatured={index === 0}
-              onDelete={handleDelete}
-            />
-          ))}
+          <DndContext onDragEnd={handleDragEnd}>
+            <SortableContext items={items}>
+              {images.map((image, index) => (
+                <ImageItem
+                  key={image.id}
+                  image={image}
+                  isFeatured={index === 0}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
         </div>
       </div>
     </section>

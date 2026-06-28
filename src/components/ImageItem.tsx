@@ -1,6 +1,7 @@
 import type { Image } from "@/types";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSortable } from "@dnd-kit/sortable";
 
 //Component fill
 // Passa dades via props: Passa cada objecte com a prop a ImageItem. Crea un type per tipar les props que estàs passant.
@@ -27,13 +28,20 @@ export default function ImageItem({
     </div>
   ) : null;
 
-  const handleDeleteClick = (event) => {
+  const handleDeleteClick = (event: React.MouseEvent) => {
     event.stopPropagation(); // Evita que el click suba al <figure>
     onDelete(image.id); // Llama al callback del padre con el id
   };
 
+  const { attributes, listeners, setNodeRef } = useSortable({ id: image.id });
+
   return (
-    <figure className={`${figureClassName} group`}>
+    <figure
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      className={`${figureClassName} group`}
+    >
       <img
         id={image.id}
         src={image.src}
