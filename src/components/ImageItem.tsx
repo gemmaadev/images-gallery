@@ -44,7 +44,7 @@ export default function ImageItem({
       <Button
         variant="outline"
         size="icon"
-        className="absolute top-2 right-2 opacity-0 group-hover:opacity-100"
+        className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
         onClick={handleDeleteClick}
       >
         <Trash2 size={20} />

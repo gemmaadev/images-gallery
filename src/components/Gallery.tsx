@@ -21,12 +21,24 @@ export default function Gallery() {
   // 'images' = la llista actual
   // 'setImages' = funció per cambiar la llista
   // IMAGES = valor inicial
+
+  const handleDelete = (id: string) => {
+    if (window.confirm("Delete this image?")) {
+      setImages(images.filter((image) => image.id !== id));
+    }
+  };
+
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {images.map((image, index) => (
-            <ImageItem key={image.id} image={image} isFeatured={index === 0} />
+            <ImageItem
+              key={image.id}
+              image={image}
+              isFeatured={index === 0}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       </div>
