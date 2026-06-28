@@ -33,14 +33,22 @@ export default function ImageItem({
     onDelete(image.id); // Llama al callback del padre con el id
   };
 
-  const { attributes, listeners, setNodeRef } = useSortable({ id: image.id });
+  const { attributes, listeners, setNodeRef, isDragging, transform } =
+    useSortable({
+      id: image.id,
+    });
 
   return (
     <figure
       ref={setNodeRef}
       {...attributes}
       {...listeners}
-      className={`${figureClassName} group`}
+      style={{
+        transform: transform
+          ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+          : undefined,
+      }}
+      className={`${figureClassName} group ${isDragging ? "cursor-grabbing opacity-50" : "cursor-grab"}`}
     >
       <img
         id={image.id}
