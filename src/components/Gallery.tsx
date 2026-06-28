@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { IMAGES } from "@/data/images";
 import ImageItem from "./ImageItem";
+import { DndContext } from "@dnd-kit/core";
+import { SortableContext } from "@dnd-kit/sortable";
 
 //Component pare
 // Passa dades via props: A Gallery, defineix un array d'objectes amb id i src (utilitza imatges de picsum.photos).
