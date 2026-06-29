@@ -21,6 +21,7 @@ import type { DragEndEvent } from "@dnd-kit/core";
 
 export default function Gallery() {
   const [images, setImages] = useState(IMAGES);
+  const [selectedIds, setSelectedIds] = useState(new Set());
   // 'images' = la llista actual
   // 'setImages' = funció per cambiar la llista
   // IMAGES = valor inicial
@@ -60,8 +61,6 @@ export default function Gallery() {
     setImages(newImages);
     // Estado actualizado con las cartas reordenadas
   };
-
-  const [selectedIds, setSelectedIds] = useState(new Set());
 
   const handleToggleSelect = (id: string) => {
     // 1. Crea nuevo Set (copia)
