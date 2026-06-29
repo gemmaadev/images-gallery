@@ -61,6 +61,25 @@ export default function Gallery() {
     // Estado actualizado con las cartas reordenadas
   };
 
+  const [selectedIds, setSelectedIds] = useState(new Set());
+
+  const handleToggleSelect = (id: string) => {
+    // 1. Crea nuevo Set (copia)
+    const newSelected = new Set(selectedIds);
+
+    // 2. ¿Está seleccionada?
+    if (selectedIds.has(id)) {
+      // Remover
+      newSelected.delete(id);
+    } else {
+      // Agregar
+      newSelected.add(id);
+    }
+
+    // 3. Actualizar estado
+    setSelectedIds(newSelected);
+  };
+
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
@@ -73,6 +92,8 @@ export default function Gallery() {
                   image={image}
                   isFeatured={index === 0}
                   onDelete={handleDelete}
+                  isSelected={selectedIds.has(image.id)}
+                  onToggleSelect={handleToggleSelect}
                 />
               ))}
             </SortableContext>
