@@ -4,6 +4,7 @@ import ImageItem from "./ImageItem";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
+import SelectionBar from "./SelectionBar";
 
 //Component pare
 // Passa dades via props: A Gallery, defineix un array d'objectes amb id i src (utilitza imatges de picsum.photos).
@@ -79,6 +80,11 @@ export default function Gallery() {
     setSelectedIds(newSelected);
   };
 
+  const handleBatchDelete = () => {
+    //STUB - temporal
+    console.log("Delete clicked, will delete", selectedIds.size, "images");
+  };
+
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
@@ -99,6 +105,20 @@ export default function Gallery() {
           </DndContext>
         </div>
       </div>
+
+      {/* Sticky button - batch action (delete)  */}
+      {selectedIds.size > 0 ? (
+        <SelectionBar
+          selectedCount={selectedIds.size}
+          onDelete={handleBatchDelete}
+          onClear={() => setSelectedIds(new Set())}
+        />
+      ) : null}
     </section>
   );
 }
+
+// Crear botó visible només quan selectedIds.size > 0
+// Mostrar comptador: Eliminar {n} imatges
+// Demanar confirmació abans d'eliminar
+// Estilitzar el botó (color vermell, posició prominent)
