@@ -31,6 +31,10 @@ export default function Gallery() {
   const handleDelete = (id: string) => {
     if (window.confirm("Delete this image?")) {
       setImages(images.filter((image) => image.id !== id));
+
+      const newSelected = new Set(selectedIds);
+      newSelected.delete(id);
+      setSelectedIds(newSelected);
     }
   };
 

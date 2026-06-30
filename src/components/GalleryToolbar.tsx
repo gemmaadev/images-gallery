@@ -33,7 +33,7 @@ export default function GalleryToolbar({
           variant="ghost"
           className="hover:bg-blue-100 hover:text-blue-500 h-10 w-10"
         >
-          <Grid2x2 strokeWidth={1} />
+          <Grid2x2 size={30} strokeWidth={1} />
         </Button>
 
         <Button

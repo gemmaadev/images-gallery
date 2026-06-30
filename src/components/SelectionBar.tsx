@@ -20,13 +20,19 @@ export default function SelectionBar({
       </div>
       <div className="flex flex-col gap-6 lg:flex-row">
         <Button
+          data-testid="selection-bar-delete"
           onClick={onDelete}
           className={`bg-red-600 text-white hover:bg-red-700 px-3 py-5`}
         >
           <Trash2 size={20} />
           Delete ({selectedCount})
         </Button>
-        <Button onClick={onClear} variant={"outline"} className="px-3 py-5">
+        <Button
+          data-testid="selection-bar-clear"
+          onClick={onClear}
+          variant={"outline"}
+          className="px-3 py-5"
+        >
           Clear selection
         </Button>
       </div>
