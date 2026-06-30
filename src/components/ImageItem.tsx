@@ -1,42 +1,47 @@
 import type { Image } from "@/types";
-import { Trash2 } from "lucide-react";
+import { Trash2, Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSortable } from "@dnd-kit/sortable";
 
-//Component fill
-// Passa dades via props: Passa cada objecte com a prop a ImageItem. Crea un type per tipar les props que estàs passant.
-// Destaca la primera imatge: A ImageItem, usa isFeatured per renderitzar condicionalment una classe de CSS que dupliqui la mida de l'element destacat.
 interface ImageItemProps {
   image: Image;
   isFeatured?: boolean;
   onDelete: (id: string) => void;
+  onToggleSelect: (id: string) => void;
+  isSelected?: boolean;
 }
-//props són els paràmetres que rep el component
 
 export default function ImageItem({
   image,
   isFeatured,
   onDelete,
+  onToggleSelect,
+  isSelected,
 }: ImageItemProps) {
   const figureClassName = isFeatured
     ? "lg:col-span-2 lg:row-span-2 rounded-lg overflow-hidden shadow-lg relative"
     : "rounded-lg overflow-hidden h-85 relative";
 
   const featuredBadge = isFeatured ? (
-    <div className="absolute top-2 left-2 bg-brand-yellow text-black px-3 py-1 rounded text-xs font-bold">
-      Featured
-    </div>
+    <>
+      <div className="bg-brand-yellow  text-black px-3 py-1.5 rounded text-xs font-bold hidden md:flex">
+        Featured
+      </div>
+      <Star
+        size={30}
+        fill="oklch(76.9% 0.188 70.08)"
+        strokeWidth={0}
+        className="flex md:hidden"
+      />
+    </>
   ) : null;
 
-  const handleDeleteClick = (event: React.MouseEvent) => {
-    event.stopPropagation(); // Evita que el click suba al <figure>
-    onDelete(image.id); // Llama al callback del padre con el id
-  };
-
   const { attributes, listeners, setNodeRef, isDragging, transform } =
-    useSortable({
-      id: image.id,
-    });
+    useSortable({ id: image.id });
+
+  const handleControlsPointerDown = (event: React.PointerEvent) => {
+    event.stopPropagation();
+  };
 
   return (
     <figure
@@ -48,7 +53,7 @@ export default function ImageItem({
           ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
           : undefined,
       }}
-      className={`${figureClassName} group ${isDragging ? "cursor-grabbing opacity-50" : "cursor-grab"}`}
+      className={`${figureClassName} group ${isDragging ? "cursor-grabbing opacity-50" : "cursor-grab"} ${isSelected ? "border-4 border-blue-500" : ""}`}
     >
       <img
         id={image.id}
@@ -56,19 +61,40 @@ export default function ImageItem({
         alt={image.alt}
         className="w-full h-full object-cover transition-all hover:scale-105 duration-300"
       />
-      {featuredBadge}
-      <Button
-        variant="outline"
-        size="icon"
-        className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
-        onClick={handleDeleteClick}
+
+      {/* Featured + Checkbox - Flex container, responsive */}
+      <div
+        onPointerDown={handleControlsPointerDown}
+        className="absolute inset-0 flex items-start p-2 gap-2 pointer-events-none"
       >
-        <Trash2 size={20} />
-      </Button>
+        {/* Checkbox */}
+        <Button
+          size="icon"
+          variant={isSelected ? "default" : "outline"}
+          onClick={() => onToggleSelect(image.id)}
+          className={`rounded-full pointer-events-auto  ${isSelected ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent border-2 border-white"}`}
+        >
+          {isSelected ? <Check size={20} /> : null}
+        </Button>
+
+        {/* Featured badge */}
+        <div>{featuredBadge}</div>
+      </div>
+
+      {/* Delete button */}
+      <div
+        onPointerDown={handleControlsPointerDown}
+        className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100  transition-opacity"
+      >
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => onDelete(image.id)}
+          className="hover:bg-red-400  hover:border-none"
+        >
+          <Trash2 size={20} />
+        </Button>
+      </div>
     </figure>
   );
 }
-
-// Definir i tipar les props: image: Image, isFeatured?: boolean
-// Renderitzar la imatge amb src i alt correctes
-// Aplicar className condicionalment segons isFeatured

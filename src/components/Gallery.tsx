@@ -4,6 +4,7 @@ import ImageItem from "./ImageItem";
 import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
+import SelectionBar from "./SelectionBar";
 
 //Component pare
 // Passa dades via props: A Gallery, defineix un array d'objectes amb id i src (utilitza imatges de picsum.photos).
@@ -21,6 +22,7 @@ import type { DragEndEvent } from "@dnd-kit/core";
 
 export default function Gallery() {
   const [images, setImages] = useState(IMAGES);
+  const [selectedIds, setSelectedIds] = useState(new Set());
   // 'images' = la llista actual
   // 'setImages' = funció per cambiar la llista
   // IMAGES = valor inicial
@@ -61,6 +63,38 @@ export default function Gallery() {
     // Estado actualizado con las cartas reordenadas
   };
 
+  const handleToggleSelect = (id: string) => {
+    // 1. Crea nuevo Set (copia)
+    const newSelected = new Set(selectedIds);
+
+    // 2. ¿Está seleccionada?
+    if (selectedIds.has(id)) {
+      // Remover
+      newSelected.delete(id);
+    } else {
+      // Agregar
+      newSelected.add(id);
+    }
+
+    // 3. Actualizar estado
+    setSelectedIds(newSelected);
+  };
+
+  const handleBatchDelete = () => {
+    if (selectedIds.size === 0) return;
+    // 1. Pedir confirmación
+    const confirmed = window.confirm(
+      `Do you want to delete ${selectedIds.size} images?`,
+    );
+    if (!confirmed) return;
+
+    // 2. Eliminar múltiples
+    setImages(images.filter((image) => !selectedIds.has(image.id)));
+
+    // 3. Limpiar selecció
+    setSelectedIds(new Set());
+  };
+
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
@@ -73,12 +107,28 @@ export default function Gallery() {
                   image={image}
                   isFeatured={index === 0}
                   onDelete={handleDelete}
+                  isSelected={selectedIds.has(image.id)}
+                  onToggleSelect={handleToggleSelect}
                 />
               ))}
             </SortableContext>
           </DndContext>
         </div>
       </div>
+
+      {/* Sticky button - batch action (delete)  */}
+      {selectedIds.size > 0 ? (
+        <SelectionBar
+          selectedCount={selectedIds.size}
+          onDelete={handleBatchDelete}
+          onClear={() => setSelectedIds(new Set())}
+        />
+      ) : null}
     </section>
   );
 }
+
+// Crear botó visible només quan selectedIds.size > 0
+// Mostrar comptador: Eliminar {n} imatges
+// Demanar confirmació abans d'eliminar
+// Estilitzar el botó (color vermell, posició prominent)
