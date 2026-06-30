@@ -22,7 +22,7 @@ export default function GalleryToolbar({
       </div>
 
       <div className="flex gap-1 items-center">
-        <select className="border border-gray-300 rounded-lg p-2">
+        <select className="hidden md:flex border border-gray-300 rounded-lg p-2">
           <option value="newest">Newest first</option>
           <option value="oldest">Oldest first</option>
           <option value="az">Name: A to Z</option>

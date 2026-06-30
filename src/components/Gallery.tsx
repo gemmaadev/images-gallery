@@ -97,7 +97,7 @@ export default function Gallery() {
   };
 
   return (
-    <section className="py-8">
+    <section className="pb-20">
       <div className="mx-auto max-w-6xl px-4">
         <GalleryToolbar
           imagesTotal={images.length}

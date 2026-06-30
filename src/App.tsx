@@ -4,7 +4,7 @@ import GalleryHeader from "@/components/GalleryHeader";
 
 export default function App() {
   return (
-    <main className="container mx-auto">
+    <main>
       <PageHeader />
       <GalleryHeader />
       <Gallery /> {/* Gallery contains GalleryToolbar + SelectionBar */}
