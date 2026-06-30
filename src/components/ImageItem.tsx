@@ -69,6 +69,7 @@ export default function ImageItem({
       >
         {/* Checkbox */}
         <Button
+          data-testid="button-checkbox"
           size="icon"
           variant={isSelected ? "default" : "outline"}
           onClick={() => onToggleSelect(image.id)}
@@ -87,6 +88,7 @@ export default function ImageItem({
         className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100  transition-opacity"
       >
         <Button
+          data-testid="button-delete"
           variant="outline"
           size="icon"
           onClick={() => onDelete(image.id)}
