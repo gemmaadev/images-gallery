@@ -13,7 +13,7 @@ export default function SelectionBar({
   onClear,
 }: SelectionBarProps) {
   return (
-    <div className="flex flex-row sticky bottom-3 bg-gray-50 justify-between px-5 py-9 shadow-lg">
+    <div className="mx-auto max-w-6xl items-center flex flex-row sticky bottom-3 bg-gray-50 justify-between px-8 py-9">
       <div className="flex-col">
         <span className="text-xl font-bold">{selectedCount} selected</span>
         <p>You can delete or clear your selection</p>
