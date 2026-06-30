@@ -1,4 +1,5 @@
 import { Moon, User, Menu, Search } from "lucide-react";
+import logo from "@/assets/images-gallery-icon.png";
 
 export default function PageHeader() {
   return (
@@ -13,11 +14,7 @@ export default function PageHeader() {
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex flex-row items-center">
             <div className="flex gap-2">
-              <img
-                src="/images-gallery-icon.png"
-                className="w-8 h-8"
-                alt="Logo"
-              />
+              <img src={logo} className="w-8 h-8" alt="Logo" />
               <span className="text-xl font-bold">ImageGallery</span>
             </div>
 

@@ -8,18 +8,18 @@ export const IMAGES: Image[] = [
   },
   {
     id: "2",
-    src: "https://picsum.photos/id/1052/800/600",
-    alt: "Black sand beach with two large volcanic rock formations",
+    src: "https://picsum.photos/id/1033/800/600",
+    alt: "Empty escalators in an airport terminal",
   },
   {
     id: "3",
-    src: "https://picsum.photos/id/1067/3800/600",
-    alt: "Aerial view of a city skyline at sunset",
+    src: "https://picsum.photos/id/1051/380/600",
+    alt: "Wooden pier leading to a mountain lake",
   },
   {
     id: "4",
-    src: "https://picsum.photos/id/1054/800/600",
-    alt: "Weathered facade of an old apartment building",
+    src: "https://picsum.photos/id/1028/800/600",
+    alt: "Dead tree trunks in a foggy landscape",
   },
   {
     id: "5",
@@ -73,8 +73,8 @@ export const IMAGES: Image[] = [
   },
   {
     id: "15",
-    src: "https://picsum.photos/id/789/800/600",
-    alt: "Field of cacti glowing in the sunlight",
+    src: "https://picsum.photos/id/788/800/600",
+    alt: "Bird on a beach during a pink sunset",
   },
   {
     id: "16",
