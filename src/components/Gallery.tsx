@@ -5,6 +5,7 @@ import { DndContext } from "@dnd-kit/core";
 import { SortableContext } from "@dnd-kit/sortable";
 import type { DragEndEvent } from "@dnd-kit/core";
 import SelectionBar from "./SelectionBar";
+import GalleryToolbar from "./GalleryToolbar";
 
 //Component pare
 // Passa dades via props: A Gallery, defineix un array d'objectes amb id i src (utilitza imatges de picsum.photos).
@@ -98,6 +99,11 @@ export default function Gallery() {
   return (
     <section className="py-8">
       <div className="mx-auto max-w-6xl px-4">
+        <GalleryToolbar
+          imagesTotal={images.length}
+          selectedCount={selectedIds.size}
+        />
+
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5">
           <DndContext onDragEnd={handleDragEnd}>
             <SortableContext items={items}>
