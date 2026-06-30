@@ -1,5 +1,5 @@
 import type { Image } from "@/types";
-import { Trash2, Check, Circle } from "lucide-react";
+import { Trash2, Check, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSortable } from "@dnd-kit/sortable";
 
@@ -23,9 +23,17 @@ export default function ImageItem({
     : "rounded-lg overflow-hidden h-85 relative";
 
   const featuredBadge = isFeatured ? (
-    <div className="bg-brand-yellow text-black px-3 py-1.5 rounded text-xs font-bold">
-      Featured
-    </div>
+    <>
+      <div className="bg-brand-yellow  text-black px-3 py-1.5 rounded text-xs font-bold hidden md:flex">
+        Featured
+      </div>
+      <Star
+        size={30}
+        fill="oklch(76.9% 0.188 70.08)"
+        strokeWidth={0}
+        className="flex md:hidden"
+      />
+    </>
   ) : null;
 
   const { attributes, listeners, setNodeRef, isDragging, transform } =
@@ -59,29 +67,30 @@ export default function ImageItem({
         onPointerDown={handleControlsPointerDown}
         className="absolute inset-0 flex items-start p-2 gap-2 pointer-events-none"
       >
-        {/* Featured badge */}
-        <div>{featuredBadge}</div>
-
         {/* Checkbox */}
         <Button
           size="icon"
           variant={isSelected ? "default" : "outline"}
           onClick={() => onToggleSelect(image.id)}
-          className={`rounded-full pointer-events-auto ${isSelected ? "bg-blue-500 hover:bg-blue-600 text-white" : ""}`}
+          className={`rounded-full pointer-events-auto  ${isSelected ? "bg-blue-500 hover:bg-blue-600 text-white" : "bg-transparent border-2 border-white"}`}
         >
-          {isSelected ? <Check size={20} /> : <Circle size={20} />}
+          {isSelected ? <Check size={20} /> : null}
         </Button>
+
+        {/* Featured badge */}
+        <div>{featuredBadge}</div>
       </div>
 
       {/* Delete button */}
       <div
         onPointerDown={handleControlsPointerDown}
-        className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity"
+        className="absolute top-2 right-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100  transition-opacity"
       >
         <Button
           variant="outline"
           size="icon"
           onClick={() => onDelete(image.id)}
+          className="hover:bg-red-400  hover:border-none"
         >
           <Trash2 size={20} />
         </Button>

@@ -18,16 +18,16 @@ export default function SelectionBar({
         <span className="text-xl font-bold">{selectedCount} selected</span>
         <p>You can delete or clear your selection</p>
       </div>
-      <div className="flex gap-6">
-        <Button onClick={onClear} variant={"outline"} className="px-3 py-5">
-          Clear selection
-        </Button>
+      <div className="flex flex-col gap-6 lg:flex-row">
         <Button
           onClick={onDelete}
           className={`bg-red-600 text-white hover:bg-red-700 px-3 py-5`}
         >
           <Trash2 size={20} />
           Delete ({selectedCount})
+        </Button>
+        <Button onClick={onClear} variant={"outline"} className="px-3 py-5">
+          Clear selection
         </Button>
       </div>
     </div>

@@ -81,8 +81,18 @@ export default function Gallery() {
   };
 
   const handleBatchDelete = () => {
-    //STUB - temporal
-    console.log("Delete clicked, will delete", selectedIds.size, "images");
+    if (selectedIds.size === 0) return;
+    // 1. Pedir confirmación
+    const confirmed = window.confirm(
+      `Do you want to delete ${selectedIds.size} images?`,
+    );
+    if (!confirmed) return;
+
+    // 2. Eliminar múltiples
+    setImages(images.filter((image) => !selectedIds.has(image.id)));
+
+    // 3. Limpiar selecció
+    setSelectedIds(new Set());
   };
 
   return (
