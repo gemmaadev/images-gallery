@@ -3,14 +3,13 @@ import { Moon, User, Menu, Search } from "lucide-react";
 export default function PageHeader() {
   return (
     <>
-      {/* Barra negra superior - Desktop only */}
       <div className="hidden md:flex bg-gray-900 text-white px-4 py-3 text-center justify-center gap-4">
         <span>Drag & drop to reorder your images</span>
         <button className="underline hover:opacity-80">Learn more</button>
       </div>
 
       <header className="flex gap-3 border-b px-8 py-5">
-        {/* Logo + Nav */}
+        {/* Logo + Navigation items */}
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex flex-row items-center">
             <div className="flex gap-2">
@@ -38,9 +37,8 @@ export default function PageHeader() {
             </nav>
           </div>
 
-          {/* Search + Icons */}
+          {/* Search bar + Icons */}
           <div className="flex gap-4 items-center">
-            {/* Contenedor del search con icono dentro */}
             <div className="relative hidden md:flex items-center">
               <input
                 type="text"

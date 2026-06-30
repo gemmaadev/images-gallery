@@ -62,7 +62,7 @@ export default function ImageItem({
         className="w-full h-full object-cover transition-all hover:scale-105 duration-300"
       />
 
-      {/* Featured + Checkbox - Flex container, responsive */}
+      {/* Checkbox + Featured */}
       <div
         onPointerDown={handleControlsPointerDown}
         className="absolute inset-0 flex items-start p-2 gap-2 pointer-events-none"

@@ -1,8 +1,5 @@
 import type { Image } from "@/types";
 
-// Crear array de mínim 6-8 imatges usant https://picsum.photos/id/{n}/300/200
-// Tipar el array amb el tipus Image
-
 export const IMAGES: Image[] = [
   {
     id: "1",

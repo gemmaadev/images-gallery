@@ -11,13 +11,12 @@ const mockImage: Image = {
 };
 
 describe("ImageItem Component", () => {
-  // Test: renderitza correctament amb les props
   it("should render correctly with props", () => {
-    // Arrange: prepara
+    // Arrange
     const onDelete = () => {};
     const onToggleSelect = () => {};
 
-    // Act: renderiza
+    // Act
     render(
       <ImageItem
         image={mockImage}
@@ -28,12 +27,11 @@ describe("ImageItem Component", () => {
       />,
     );
 
-    // Assert: verifica
+    // Assert
     const image = screen.getByAltText("Test image");
     expect(image).toBeInTheDocument();
   });
 
-  // Test: aplica classe featured quan isFeatured és true
   it("should apply featured class when isFeatured is true", () => {
     // Arrange
     const onDelete = () => {};
@@ -50,12 +48,11 @@ describe("ImageItem Component", () => {
       />,
     );
 
-    // Assert: verifica que aparece el badge
+    // Assert
     const badge = screen.getByText("Featured");
     expect(badge).toBeInTheDocument();
   });
 
-  // Test: aplica classe de selecció quan isSelected és true
   it("should apply selected class when isSelected is true", () => {
     // Arrange
     const onDelete = () => {};
@@ -72,15 +69,14 @@ describe("ImageItem Component", () => {
       />,
     );
 
-    // Assert: verifica que l'icon check és de color blau
+    // Assert: Verify border classes applied when selected
     const checkSelected = container.querySelector("figure");
     expect(checkSelected).toHaveClass("border-4");
     expect(checkSelected).toHaveClass("border-blue-500");
   });
 
-  // Test: emet onDelete en fer click al botó d'eliminar
   it("should call onDelete when delete button is clicked", async () => {
-    // Arrange
+    // Arrange: Use vi.fn() to mock and spy on callback
     const onDelete = vi.fn();
     const onToggleSelect = () => {};
     const user = await userEvent.setup();
@@ -96,33 +92,34 @@ describe("ImageItem Component", () => {
       />,
     );
 
-    // Assert
     const deleteButton = screen.getByTestId("button-delete");
     await user.click(deleteButton);
+
+    // Assert
     expect(onDelete).toHaveBeenCalledWith(mockImage.id);
   });
-});
 
-// Test: emet onToggleSelect en fer click al botó de checkbox
-it("should call onToggleSelect when checkbox button is clicked", async () => {
-  // Arrange
-  const onDelete = () => {};
-  const onToggleSelect = vi.fn();
-  const user = await userEvent.setup();
+  it("should call onToggleSelect when checkbox button is clicked", async () => {
+    // Arrange: Use vi.fn() to mock and spy on callback
+    const onDelete = () => {};
+    const onToggleSelect = vi.fn();
+    const user = await userEvent.setup();
 
-  // Act
-  render(
-    <ImageItem
-      image={mockImage}
-      isFeatured={false}
-      isSelected={false}
-      onDelete={onDelete}
-      onToggleSelect={onToggleSelect}
-    />,
-  );
+    // Act
+    render(
+      <ImageItem
+        image={mockImage}
+        isFeatured={false}
+        isSelected={false}
+        onDelete={onDelete}
+        onToggleSelect={onToggleSelect}
+      />,
+    );
 
-  // Assert
-  const checkboxButton = screen.getByTestId("button-checkbox");
-  await user.click(checkboxButton);
-  expect(onToggleSelect).toHaveBeenCalledWith(mockImage.id);
+    const checkboxButton = screen.getByTestId("button-checkbox");
+    await user.click(checkboxButton);
+
+    // Assert
+    expect(onToggleSelect).toHaveBeenCalledWith(mockImage.id);
+  });
 });
