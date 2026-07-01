@@ -1,1 +1,72 @@
+@import "tailwindcss";
 @import "./variables.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  /* Reset universal */
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  /* HTML and Body */
+  html {
+    @apply font-sans p-0 m-0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground p-0 m-0 min-h-screen;
+  }
+
+  /* Root */
+  #root {
+    @apply w-full p-0 m-0;
+  }
+
+  /* Images */
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    @apply block max-w-full;
+  }
+
+  /* Links */
+  a {
+    @apply text-foreground no-underline;
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    @apply list-none p-0 m-0;
+  }
+
+  /* Forms */
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    @apply cursor-pointer border-0 bg-none;
+  }
+
+  /* Focus */
+  :focus-visible {
+    @apply outline-2 outline-primary outline-offset-2;
+  }
+}

@@ -1,9 +1,13 @@
+import Gallery from "@/components/Gallery";
+import PageHeader from "@/components/PageHeader";
+import GalleryHeader from "@/components/GalleryHeader";
+
 export default function App() {
   return (
-    <main className="container">
-      <h1>Images gallery</h1>
-      <p>Welcome to my images gallery</p>
-      {/* <Gallery /> de la carpeta components */}
+    <main>
+      <PageHeader />
+      <GalleryHeader />
+      <Gallery /> {/* Gallery contains GalleryToolbar + SelectionBar */}
     </main>
   );
 }

@@ -16,6 +16,8 @@ node_modules
 # Temporary files and cache of Vite / TS
 .vite
 .tscache
+coverage/    
+.nyc_output/
 
 # Environment configuration / Secrets (Tokens, APIs...)
 .env
